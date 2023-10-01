@@ -104,9 +104,8 @@ total_fire = 0
 put_out_cells = []
 print("Cells:")
 for fire in fires:
-    args = fire.split(" = ")
-    fire_type = args[0]
-    level = int(args[1])
+    fire_type, level = fire.split(" = ")
+    level = int(level)
     valid_checker = False
     if water < level:
         continue
@@ -130,6 +129,44 @@ print(f'Effort: {effort:.2f}')
 print(f'Total Fire: {total_fire}')
 
 # hello, france
+items = input().split("|")
+budget = float(input())
+profit = 0
+new_prices = []
+for item in items:
+    price_checker = False
+    type1, price = item.split("->")
+    price = float(price)
+    if type1 == "Clothes":
+        if price <= 50:
+            price_checker = True
+    elif type1 == "Shoes":
+        if price <= 35:
+            price_checker = True
+    elif type1 == "Accessories":
+        if price <= 20.50:
+            price_checker = True
+    if price_checker:
+        if budget < price:
+            continue
+        else:
+            budget -= price
+            new_price = price * 1.4
+            profit += new_price - price
+            new_prices.append(new_price)
+prices_profit = sum(new_prices)
+budget += prices_profit
+for i in new_prices:
+    print(f'{i:.2f}', end= " ")
+# print(*new_prices, sep=" ") wanted to do it like that and with using the round function while appending, but the task
+# demanded the numbers to be formatted
+print()
+print(f"Profit: {profit:.2f}")
+if budget >= 150:
+    print("Hello, France!")
+else:
+    print("Not enough money.")
+
 
 # bread factory
 events = input().split("|")
