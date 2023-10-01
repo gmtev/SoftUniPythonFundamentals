@@ -74,8 +74,60 @@ for i in range(remover):
 print(*numbers, sep=', ')
 
 # easter gifts
+gifts = input().split()
+command = input()
+
+while command != "No Money":
+    command = command.split()
+    if "OutOfStock" in command:
+        for i in range(len(gifts)):
+            if command[1] in gifts[i]:
+                gifts[i] = "None"
+    elif "Required" in command:
+        for i in range(len(gifts)):
+            if i == int(command[2]):
+                gifts[i] = command[1]
+    elif "JustInCase" in command:
+        gifts[-1] = command[1]
+    command = input()
+while "None" in gifts:
+    gifts.remove("None")
+for i in gifts:
+    print(i, end=" ")
+
 
 # seize the fire
+fires = input().split("#")
+water = int(input())
+effort = 0
+total_fire = 0
+put_out_cells = []
+print("Cells:")
+for fire in fires:
+    args = fire.split(" = ")
+    fire_type = args[0]
+    level = int(args[1])
+    valid_checker = False
+    if water < level:
+        continue
+    if fire_type == 'High':
+        if 81 <= level <= 125:
+            valid_checker = True
+    elif fire_type == 'Medium':
+        if 51 <= level <= 80:
+            valid_checker = True
+    elif fire_type == 'Low':
+        if 1 <= level <= 50:
+            valid_checker = True
+    if valid_checker:
+        put_out_cells.append(level)
+        water -= level
+        effort += level * 0.25
+        total_fire += level
+for cell in put_out_cells:
+    print(f' - {cell}')
+print(f'Effort: {effort:.2f}')
+print(f'Total Fire: {total_fire}')
 
 # hello, france
 
