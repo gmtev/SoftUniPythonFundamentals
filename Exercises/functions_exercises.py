@@ -73,3 +73,17 @@ even_numbers = filter(even_finder, numbers)
 for i in even_numbers:
     even.append(i)
 print(even)
+
+# sort
+
+numbers = [int(i) for i in input().split()]
+print(sorted(numbers))
+
+# Min, Max and Sum
+
+numbers = [int(i) for i in input().split()]
+print(f"The minimum number is {min(numbers)}")
+print(f"The maximum number is {max(numbers)}")
+print(f"The sum number is: {sum(numbers)}")
+
+# Palindrome integers
