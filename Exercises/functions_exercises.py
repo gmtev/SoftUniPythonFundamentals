@@ -87,3 +87,41 @@ print(f"The maximum number is {max(numbers)}")
 print(f"The sum number is: {sum(numbers)}")
 
 # Palindrome integers
+integers = [int(i) for i in input().split(", ")]
+
+
+def palindrome_integers_checker(num):
+    num = str(num)
+    if num == num[::-1]:
+        return True
+    else:
+        return False
+
+
+for i in integers:
+    print(palindrome_integers_checker(i))
+
+# Password validator
+password = input()
+
+
+def password_validator(check):
+    valid_checker = True
+    if len(check) < 6 or len(check) > 10:
+        valid_checker = False
+        return "Password must be between 6 and 10 characters"
+    if any(not i.isalnum() for i in check):
+        valid_checker = False
+        return "Password must consist only of letters and digits"
+    if sum(i.isdigit() for i in check) < 2:
+        valid_checker = False
+        return "Password must have at least 2 digits"
+    if valid_checker:
+        return "Password is valid"
+
+
+print(password_validator(password))
+
+# Perfect number
+
+
