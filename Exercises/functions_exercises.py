@@ -12,17 +12,17 @@ print(smallest_of_three_numbers(n1, n2, n3))
 number_1, number_2, number_3 = int(input()), int(input()), int(input())
 
 
-def sum_numbers(a,b):
+def sum_numbers(a, b):
     return a + b
 
 
-def subtract(c,d):
+def subtract(c, d):
     return c - d
 
 
-def add_and_subtract(a,b,c):
-    summed = sum_numbers(a,b)
-    return subtract(summed,c)
+def add_and_subtract(a, b, c):
+    summed = sum_numbers(a, b)
+    return subtract(summed, c)
 
 
 print(add_and_subtract(number_1, number_2, number_3))
@@ -50,7 +50,7 @@ def odd_and_even_sum(num):
         i = int(i)
         if i % 2 == 0:
             even += i
-        elif i %2 != 0:
+        elif i % 2 != 0:
             odd += i
     return f"Odd sum = {odd}, Even sum = {even}"
 
@@ -125,3 +125,30 @@ print(password_validator(password))
 # Perfect number
 
 
+# Loading bar
+number = int(input())
+
+
+def loading_bar(num:int) -> str:
+    if num == 100:
+        return "100% Complete!\n[%%%%%%%%%%]"
+    loaded_percent = num // 10
+    return f"{num}% [{'%'*loaded_percent}{'.'*(10 - loaded_percent)}]\nStill loading..."
+
+
+print(loading_bar(number))
+
+# Factorial division
+
+
+def factorials (num):
+    for i in range(1, num):
+        num *= i
+    return num
+
+
+first_number = int(input())
+second_number = int(input())
+
+
+print(f"{factorials(first_number)/(factorials(second_number)):.2f}")
