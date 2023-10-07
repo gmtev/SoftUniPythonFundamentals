@@ -106,23 +106,38 @@ password = input()
 
 
 def password_validator(check):
-    valid_checker = True
+    list_of_errors = []
     if len(check) < 6 or len(check) > 10:
-        valid_checker = False
-        return "Password must be between 6 and 10 characters"
+        list_of_errors.append("Password must be between 6 and 10 characters")
     if any(not i.isalnum() for i in check):
-        valid_checker = False
-        return "Password must consist only of letters and digits"
+        list_of_errors.append("Password must consist only of letters and digits")
     if sum(i.isdigit() for i in check) < 2:
-        valid_checker = False
-        return "Password must have at least 2 digits"
-    if valid_checker:
-        return "Password is valid"
+        list_of_errors.append("Password must have at least 2 digits")
+    return list_of_errors
 
 
-print(password_validator(password))
+password_checker = password_validator(password)
+if not password_checker: # if list of errors is empty
+    print("Password is valid")
+else:
+    print("\n".join(password_checker))
+
 
 # Perfect number
+number = int(input())
+
+
+def is_perfect(num):
+    divisors_sum = 0
+    for divisor in range(1, num):
+        if num % divisor == 0:
+            divisors_sum += divisor
+    if num == divisors_sum:
+        return "We have a perfect number!"
+    return "It's not so perfect."
+
+
+print(is_perfect(number))
 
 
 # Loading bar
