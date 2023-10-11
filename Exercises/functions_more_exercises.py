@@ -48,3 +48,26 @@ def tribonacci(counter):
 n = int(input())
 for i in range(n):
     print(tribonacci(i), end=" ")
+
+# Multiplication Sign
+
+
+def mult_sign(n1, n2, n3):
+    if n1 == 0 or n2 == 0 or n3 == 0:
+        return "zero"
+    numbers = [n1, n2, n3]
+    negative = 0
+    for num in numbers:
+        if num < 0:
+            negative += 1
+    if negative == 1 or negative == 3:
+        return "negative"
+    else:
+        return "positive"
+
+
+
+int1 = int(input())
+int2 = int(input())
+int3 = int(input())
+print(mult_sign(int1, int2, int3))
