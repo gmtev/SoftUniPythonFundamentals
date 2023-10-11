@@ -32,4 +32,19 @@ def cartesian(x1, y1, x2, y2: float):
 
 print(cartesian(X1, Y1, X2, Y2))
 
+# Tribonacci Sequence
+def tribonacci(counter):
+    if counter == 0 or counter == 1:
+        return 1
+    elif counter == 2:
+        return 2
+    elif counter == 3:
+        return 4
+    else:
+        return (tribonacci(counter - 1) +
+                tribonacci(counter - 2) +
+                tribonacci(counter - 3))
 
+n = int(input())
+for i in range(n):
+    print(tribonacci(i), end=" ")
