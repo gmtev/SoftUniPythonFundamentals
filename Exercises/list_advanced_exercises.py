@@ -44,3 +44,82 @@ print(f"Even: {', '.join([i for i in numbers if int(i) % 2 == 0])}")
 print(f"Odd: {', '.join([i for i in numbers if int(i) % 2 != 0])}")
 
 # office chairs
+
+
+def room_checker(number_of_rooms):
+    free = 0
+    for room_num in range(1, number_of_rooms+1):
+        free_chairs_current, visitors = input().split()
+        dif = len(free_chairs_current) - int(visitors)
+        if dif < 0:
+            print(f"{abs(dif)} more chairs needed in room {room_num}")
+        free += dif  # works as well with negative chairs
+    return free
+
+
+rooms = int(input())
+total_free = room_checker(rooms)
+if total_free >= 0:
+    print(f"Game On, {total_free} free chairs left")
+# without a function
+rooms_1 = int(input())
+free_1 = 0
+for room_num_1 in range(1, rooms_1+1):
+    free_chairs, visitors_1 = input().split()
+    diff_1 = len(free_chairs) - int(visitors_1)
+    if diff_1 < 0:
+        print(f"{abs(diff_1)} more chairs needed in room {room_num_1}")
+    free_1 += diff_1
+if free_1 >= 0:
+    print(f"Game On, {free_1} free chairs left")
+
+# electron distribution
+number_of_electrons = int(input())
+shells = []
+for shell in range(1, number_of_electrons+1):
+    max_el = 2 * shell ** 2
+    if number_of_electrons >= max_el:
+        shells.append(max_el)
+        number_of_electrons -= max_el
+        if number_of_electrons == 0:
+            break
+    else:
+        shells.append(number_of_electrons)
+        break
+print(shells)
+# with "while" loop
+number_of_electrons = int(input())
+shells = []
+shell = 1
+while number_of_electrons > 0:
+    max_el = 2 * shell ** 2
+    shell += 1
+    if number_of_electrons >= max_el:
+        shells.append(max_el)
+        number_of_electrons -= max_el
+    else:
+        shells.append(number_of_electrons)
+        break
+print(shells)
+
+# Group of 10's
+numbers_to_store = [int(digit) for digit in input().split(", ")]
+current_limit = 10
+while numbers_to_store:
+    filtered = [i for i in numbers_to_store if i <= current_limit]
+    print(f"Group of {current_limit}'s: {filtered}")
+    current_limit += 10
+    numbers_to_store = [digit for digit in numbers_to_store if digit not in filtered]
+
+# decipher this
+message = input().split()
+deciphered_message = []
+for i in message:
+    numbers_to_decipher = [checker for checker in i if checker.isdigit()]
+    words = [checker for checker in i if checker not in numbers_to_decipher]
+    first_letter = chr(int(''.join(numbers_to_decipher)))
+    words[0], words[-1] = words[-1], words[0]
+    deciphered_word = first_letter + "".join(words)
+    deciphered_message.append(deciphered_word)
+print(' '.join(deciphered_message))
+
