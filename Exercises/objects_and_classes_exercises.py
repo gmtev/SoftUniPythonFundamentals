@@ -125,3 +125,59 @@ class Article:
 
     def __repr__(self):
         return f"{self.title} - {self.content}: {self.author}"
+
+
+# Vehicle
+class Vehicle:
+
+    def __init__(self, type, model, price):
+        self.type = type
+        self.model = model
+        self.price = price
+        self.owner = None
+
+    def buy(self, money, owner):
+        if money >= self.price and self.owner is None:
+            self.owner = owner
+            change = money - self.price
+            return f"Successfully bought a {self.type}. Change: {change:.2f}"
+        elif money < self.price:
+            return "Sorry, not enough money"
+        else:
+            return "Car already sold"
+
+    def sell(self):
+        if self.owner:
+            self.owner = None
+        else:
+            return "Vehicle has no owner"
+
+    def __repr__(self):
+        if self.owner:
+            return f"{self.model} {self.type} is owned by: {self.owner}"
+        else:
+            return f"{self.model} {self.type} is on sale: {self.price}"
+
+
+# Movie
+class Movie:
+    __watched_movies = 0
+
+    def __init__(self, name, director):
+        self.name = name
+        self.director = director
+        self.watched = False
+
+    def change_name(self, new_name):
+        self.name = new_name
+
+    def change_director(self, new_director):
+        self.director = new_director
+
+    def watch(self):
+        if not self.watched:
+            self.watched = True
+            Movie.__watched_movies += 1
+
+    def __repr__(self):
+        return f"Movie name: {self.name}; Movie director: {self.director}. Total watched movies: {Movie.__watched_movies}"
