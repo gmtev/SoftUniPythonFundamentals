@@ -74,6 +74,57 @@ while not flag:
 for k,v in items.items():
     print(f'{k}: {int(v)}')
 
+# orders
+products = {}
+cmd = input()
+while cmd != "buy":
+    name, price, quantity = cmd.split()
+    price = float(price)
+    quantity = int(quantity)
+    if name not in products.keys():
+        products[name] = [float(price), int(quantity)]
+    else:
+        products[name][1] += int(quantity)
+        products[name][0] = float(price)
+    cmd = input()
+for i in products.items():
+    print(f"{i[0]} -> {(i[1][0]*i[1][1]):.2f}")
+
+# softuni parking
+commands = int(input())
+users = {}
+for i in range(commands):
+    command = input().split()
+    if len(command) == 2:
+        if command[1] not in users.keys():
+            print(f"ERROR: user {command[1]} not found")
+        else:
+            print(f"{command[1]} unregistered successfully")
+            users.pop(command[1])
+    else:
+        if command[1] not in users.keys():
+            users[command[1]] = command[2]
+            print(f"{command[1]} registered {command[2]} successfully")
+        else:
+            print(f"ERROR: already registered with plate number {command[2]}")
+for k, v in users.items():
+    print(f"{k} => {v}")
+
+# courses
+students = {}
+cmd = input()
+while cmd != "end":
+    course, student = cmd.split(' : ')
+    if course not in students.keys():
+        students[course] = [student]
+    else:
+        students[course] += [student]
+    cmd = input()
+for k, v in students.items():
+    print(f"{k}: {len(v)}")
+    for student in v:
+        print(f"-- {student}")
+
 # force book
 force_sides = {}
 cmd = input()
