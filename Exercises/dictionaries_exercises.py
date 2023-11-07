@@ -125,6 +125,43 @@ for k, v in students.items():
     for student in v:
         print(f"-- {student}")
 
+# student academy
+rows = int(input())
+students = {}
+for i in range(rows):
+    name = input()
+    grade = float(input())
+    if name not in students.keys():
+        turn = 0
+        students[name] = [0, turn]
+    students[name][0] += grade
+    students[name][1] += 1
+for i in students:
+    average = students[i][0] / students[i][1]
+    if average >= 4.50:
+        print(f"{i} -> {average:.2f}")
+
+# company users
+companies_info = {}
+information = input()
+while information != "End":
+    identical = False
+    company_name, ID = information.split(" -> ")
+    if company_name in companies_info.keys():
+        for i in companies_info[company_name]:
+            if ID == i:
+                identical = True
+                break
+    if not identical:
+        if company_name not in companies_info.keys():
+            companies_info[company_name] = []
+        companies_info[company_name].append(ID)
+    information = input()
+for k,v in companies_info.items():
+    print(f"{k}")
+    for id in v:
+        print(f"-- {id}")
+
 # force book
 force_sides = {}
 cmd = input()
