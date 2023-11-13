@@ -52,3 +52,27 @@ message = input()
 for i in range(len(message)):
     if message[i] == ":":
         print(f"{message[i]}{message[i+1]}")
+
+# replace repeating chars
+chars = input()
+filtered = ''
+last_char = ""
+for i in chars:
+    if i != last_char or len(filtered) == 0:
+        filtered += i
+    last_char = i
+print(filtered)
+
+# string explosion
+pre_explosion_string = input()
+output = ""
+explosion = 0
+for i in range(len(pre_explosion_string)):
+    if pre_explosion_string[i] == ">":
+        explosion += int(pre_explosion_string[i + 1])
+        output += pre_explosion_string[i]
+    elif pre_explosion_string[i] != ">" and explosion > 0:
+        explosion -= 1
+    else:
+        output += pre_explosion_string[i]
+print(output)
