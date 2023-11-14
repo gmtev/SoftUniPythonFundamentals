@@ -76,3 +76,44 @@ for i in range(len(pre_explosion_string)):
     else:
         output += pre_explosion_string[i]
 print(output)
+
+# rage quit
+message = input()
+rage_message = ""
+repetitions = ''
+current = ""
+for i in range(len(message)):
+    if not message[i].isdigit():
+        current += message[i].upper()
+    else:
+        for next_symbol in range(i, len(message)):
+            if not message[next_symbol].isdigit():
+                break
+            repetitions += message[next_symbol]
+        rage_message += current * int(repetitions)
+        current = ''
+        repetitions = ''
+print(f"Unique symbols used: {len(set(rage_message))}")
+print(rage_message)
+
+
+# winning ticket
+def ticket_checker(ticket):
+    if len(ticket) != 20:
+        return "invalid ticket"
+    winning_symbols = ["@", "#", "$", "^"]
+    left_part = ticket[:10]
+    right_part = ticket[10:]
+    for matched in winning_symbols:
+        for uninterrupted_matched in range(10, 5, -1):
+            winning_symbol_repetition = matched * uninterrupted_matched
+            if winning_symbol_repetition in left_part and winning_symbol_repetition in right_part:
+                if uninterrupted_matched == 10:
+                    return f'ticket "{ticket}" - {uninterrupted_matched}{matched} Jackpot!'
+                return f'ticket "{ticket}" - {uninterrupted_matched}{matched}'
+    return f'ticket "{ticket}" - no match'
+
+
+tickets = [ticket.strip() for ticket in input().split(', ')]
+for current_ticket in tickets:
+    print(ticket_checker(current_ticket))
