@@ -77,6 +77,27 @@ for i in range(len(pre_explosion_string)):
         output += pre_explosion_string[i]
 print(output)
 
+# letters change numbers
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+strings = [word.strip() for word in input().split()]
+sum_of_words = 0
+for word in strings:
+    first_letter = word[0]
+    last_letter = word[-1]
+    number = int(word[1:-1])
+    first_letter_index = alphabet.index(first_letter.lower()) + 1
+    last_letter_index = alphabet.index(last_letter.lower()) + 1
+    if first_letter.isupper():
+        number /= first_letter_index
+    elif first_letter.islower():
+        number *= first_letter_index
+    if last_letter.isupper():
+        number -= last_letter_index
+    elif last_letter.islower():
+        number += last_letter_index
+    sum_of_words += number
+print(f'{sum_of_words:.2f}')
+
 # rage quit
 message = input()
 rage_message = ""
