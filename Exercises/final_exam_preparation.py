@@ -36,3 +36,41 @@ for barcode in range(number_of_barcodes):
         print(f"Product group: {product_group}")
     else:
         print("Invalid barcode")
+
+# need for speed III
+number_of_cars = int(input())
+cars = {}
+for car in range(number_of_cars):
+    car_model, mileage, fuel = input().split('|')
+    cars[car_model] = [int(mileage), int(fuel)]
+while True:
+    command = input()
+    if command == "Stop":
+        break
+    else:
+        command = command.split(' : ')
+        if command[0] == "Drive":
+            if int(command[3]) > (cars[command[1]][1]):
+                print("Not enough fuel to make that ride")
+            else:
+                cars[command[1]][0] += int(command[2])
+                cars[command[1]][1] -= int(command[3])
+                print(f"{command[1]} driven for {command[2]} kilometers. {command[3]} liters of fuel consumed.")
+            if cars[command[1]][0] >= 100000:
+                print(f"Time to sell the {command[1]}!")
+                cars.pop(command[1])
+        elif command[0] == "Refuel":
+            if cars[command[1]][1] + int(command[2]) > 75:
+                added = 75 - cars[command[1]][1]
+            else:
+                added = int(command[2])
+            cars[command[1]][1] += added
+            print(f"{command[1]} refueled with {added} liters")
+        elif command[0] == "Revert":
+            cars[command[1]][0] -= int(command[2])
+            if cars[command[1]][0] < 10000:
+                cars[command[1]][0] = 10000
+            else:
+                print(f"{command[1]} mileage decreased by {command[2]} kilometers")
+for car, stats in cars.items():
+    print(f"{car} -> Mileage: {stats[0]} kms, Fuel in the tank: {stats[1]} lt.")
