@@ -74,3 +74,76 @@ while True:
                 print(f"{command[1]} mileage decreased by {command[2]} kilometers")
 for car, stats in cars.items():
     print(f"{car} -> Mileage: {stats[0]} kms, Fuel in the tank: {stats[1]} lt.")
+
+
+# other way to do it
+def add_car(name, mileage, fuel):
+    return {'name': name, 'mileage': mileage, 'fuel': fuel}
+
+
+def drive(car, distance, required_fuel):
+    if car['fuel'] >= required_fuel:
+        car['mileage'] += distance
+        car['fuel'] -= fuel
+        print(f"{car['name']} driven for {distance} kilometers. {required_fuel} liters of fuel consumed.")
+        if car['mileage'] > 100000:
+            print(f"Time to sell the {car['name']}!")
+            return True
+        else:
+            print("Not enough fuel to make that ride")
+
+        return False
+
+
+def refuel(car, added_fuel):
+    max = 75
+    fuel_added = min(added_fuel, max - car['fuel'])
+    car['fuel'] += fuel_added
+    print(f"{car['name']} refueled with {fuel_added} liters")
+
+
+def revert(car, kilometers):
+    car['mileage'] -= kilometers
+    if car['mileage'] < 10000:
+        car['mileage'] = 10000
+    else:
+        print(f"{car['name']} mileage decreased by {kilometers} kilometers")
+
+
+def main_function():
+    number_of_cars = int(input())
+    cars = []
+    for i in range(number_of_cars):
+        car_info = input().split('|')
+        car = add_car(car_info[0], int(car_info[1]), int(car_info[2]))
+        cars.append(car)
+
+    while True:
+        command = input()
+        if command == "Stop":
+            break
+
+        command = command.split(' : ')
+        action = command[0]
+        car_name = command[1]
+        for car in cars:
+            if car['name'] == car_name:
+                if action == "Drive":
+                    distance = int(command[2])
+                    fuel = int(command[3])
+                    if drive(car,distance,fuel):
+                        cars.remove(car)
+                elif action == "Refuel":
+                    added_fuel = int(command[2])
+                    refuel(car, added_fuel)
+                elif action == "Revert":
+                    kilometers = int(command[2])
+                    revert(car, kilometers)
+
+    for car in cars:
+        print(f"{car['name']} -> Mileage: {car['mileage']} kms, Fuel in the tank: {car['fuel']} lt.")
+
+
+main_function()
+
+# mirror words
