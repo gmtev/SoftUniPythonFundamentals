@@ -147,3 +147,20 @@ def main_function():
 main_function()
 
 # mirror words
+the_string = input()
+regex = r'(@|#)([a-zA-Z]{3,})\1{2}([a-zA-Z]{3,})\1'
+matches = re.findall(regex, the_string)
+mirror_words = []
+if matches:
+    print(f"{len(matches)} word pairs found!")
+    for match in matches:
+        if match[1][::-1] == match[2]:
+            mirror_words.append(f"{match[1]} <=> {match[2]}")
+else:
+    print("No word pairs found!")
+if mirror_words:
+    print('The mirror words are:')
+    print(', '.join(mirror_words))
+else:
+    print("No mirror words!")
+    
