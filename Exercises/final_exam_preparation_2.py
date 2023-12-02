@@ -20,7 +20,7 @@ print(f"Ready for world tour! Planned stops: {stops}")
 # ad astra
 food = input()
 regex = r"(\#|\|)([A-Za-z\s]+)\1(\d{2}\/\d{2}\/\d{2})\1(\d{1,4}|10000)\1"
-matches = re.findall(regex,food)  # remember to use this
+matches = re.findall(regex, food)  # remember to use this
 calories = sum([int(match[3]) for match in matches])
 days = calories // 2000
 print(f"You have food to last you for: {days} days!")
@@ -62,3 +62,28 @@ if cities:
         print(f"{city} -> Population: {city_info['population']} citizens, Gold: {city_info['gold']} kg")
 else:
     print("Ahoy, Captain! All targets have been plundered and destroyed!")
+
+# secret chat
+encoded_message = input()
+while True:
+    error = False
+    command = input().split(':|:')
+    if command[0] == "Reveal":
+        break
+    elif command[0] == "InsertSpace":
+        index = int(command[1])
+        encoded_message = encoded_message[:int(command[1])] + ' ' + encoded_message[int(command[1]):]
+    elif command[0] == "Reverse":
+        substring = command[1]
+        if substring in encoded_message:
+            occurrence = encoded_message.index(f'{substring}')
+            new_substring = substring[::-1]
+            encoded_message = encoded_message[:occurrence] + encoded_message[occurrence+(len(substring)):] + new_substring
+        else:
+            print('error')
+            error = True
+    elif command[0] == "ChangeAll":
+        encoded_message = encoded_message.replace(command[1], command[2])
+    if not error:
+        print(encoded_message)
+print(f"You have a new text message: {encoded_message}")
